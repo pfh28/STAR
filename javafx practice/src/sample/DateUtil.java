@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class DateUtil
+public class DateUtil                                                       // a setup for the dates
 {
     private static final String DATE_PATTERN = "dd.MM.yyyy";
 

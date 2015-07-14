@@ -22,7 +22,7 @@ import javax.xml.bind.Marshaller;
 
 public class Main extends Application
 {
-    private Stage primaryStage;
+    private Stage primaryStage;                                                          //variable decrarations
     private BorderPane rootLayout;
     private ObservableList<Person> personData = FXCollections.observableArrayList();
 
@@ -47,7 +47,7 @@ public class Main extends Application
     }
 
     @Override
-    public void start(Stage primaryStage)
+    public void start(Stage primaryStage)                                               //creates main stage
     {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Address App");
@@ -61,23 +61,23 @@ public class Main extends Application
 
     public void initRootLayout()
     {
- try
+        try
         {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("\\RootLayout.fxml"));
-            rootLayout = (BorderPane) loader.load();
+            rootLayout = (BorderPane) loader.load();                            //loads layout
 
-            Scene scene = new Scene(rootLayout);
+            Scene scene = new Scene(rootLayout);                               //Creates the scene specified by the FXML
             primaryStage.setScene(scene);
 
-            RootLayoutController controller = loader.getController();
+            RootLayoutController controller = loader.getController();           //connects controller to Main
             controller.setMainApp(this);
 
-            primaryStage.show();
+            primaryStage.show();                                               //displays the stage
         }catch(IOException e)
             {e.printStackTrace();}
 
-        File file = getPersonFilePath();
+        File file = getPersonFilePath();                                      //loads data if there is any
         if (file != null)
             loadPersonDataFromFile(file);
     }
@@ -90,9 +90,9 @@ public class Main extends Application
             loader.setLocation(Main.class.getResource("\\PersonOverview.fxml"));
             AnchorPane personOverview = (AnchorPane) loader.load();
 
-            rootLayout.setCenter(personOverview);
+            rootLayout.setCenter(personOverview);                           //uses FXML instructions
 
-            PersonOverviewController controller = loader.getController();
+            PersonOverviewController controller = loader.getController();   //gives controller access
             controller.setMainApp(this);
         }catch(IOException e)
         {e.printStackTrace();}
@@ -106,15 +106,15 @@ public class Main extends Application
             loader.setLocation(Main.class.getResource("\\PersonEditDialouge.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
-            Stage dialougeStage = new Stage();
+            Stage dialougeStage = new Stage();                              //makes settings for stage
             dialougeStage.setTitle("Edit person");
             dialougeStage.initModality(Modality.WINDOW_MODAL);
             dialougeStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialougeStage.setScene(scene);
+            Scene scene = new Scene(page);                                 //creates scene as instructed
+            dialougeStage.setScene(scene);                                 //and adds to stage
 
             PersonEditDialougeController controller = loader.getController();
-            controller.setDialougeStage(dialougeStage);
+            controller.setDialougeStage(dialougeStage);                    //lines give controller access
             controller.setPerson(person);
 
             dialougeStage.showAndWait();
@@ -133,7 +133,7 @@ public class Main extends Application
         return primaryStage;
     }
 
-    public File getPersonFilePath()
+    public File getPersonFilePath()                                 //used above
     {
         Preferences prefs = Preferences.userNodeForPackage(Main.class);
         String filePath = prefs.get("filePath",null);
@@ -143,24 +143,25 @@ public class Main extends Application
             return null;
     }
 
-    public void setPersonFilePath(File file)
+    public void setPersonFilePath(File file)                            //used below
     {
         Preferences prefs = Preferences.userNodeForPackage(Main.class);
         if(file != null)
         {
             prefs.put("filePath",file.getPath());
 
-            primaryStage.setTitle("AddressApp - " + file.getName());
+            primaryStage.setTitle("AddressApp - " + file.getName());    //changes stage title
         }else
             prefs.remove("filePath");
 
         primaryStage.setTitle("AddressApp");
     }
 
-    public void loadPersonDataFromFile(File file) {
+    public void loadPersonDataFromFile(File file)
+    {
         try {
             JAXBContext context = JAXBContext
-                    .newInstance(PersonListWrapper.class);
+                    .newInstance(PersonListWrapper.class);          //sets to allow list to be stored and retrieved
             Unmarshaller um = context.createUnmarshaller();
 
             // Reading XML from the file and unmarshalling.
@@ -184,7 +185,7 @@ public class Main extends Application
 
     public void savePersonDataToFile(File file)
     {
-        try
+        try                                                                             //stores data via JAXB
         {
             JAXBContext context = JAXBContext.newInstance(PersonListWrapper.class);
             Marshaller m = context.createMarshaller();
@@ -193,10 +194,10 @@ public class Main extends Application
             PersonListWrapper wrapper = new PersonListWrapper();
             wrapper.setPersons(personData);
 
-            m.marshal(wrapper,file);
+            m.marshal(wrapper, file);
 
             setPersonFilePath(file);
-        }catch(Exception E)
+        }catch(Exception E)                                                 //produces an error on exception
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -204,6 +205,31 @@ public class Main extends Application
             alert.setContentText("Could not save data ro file:\n"+file.getPath());
 
             alert.showAndWait();
+        }
+
+    }
+
+    public void showBirthdayStatistics()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("\\BirthdayStatistics.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();                               //sets up scene
+            Stage dialougeStage = new Stage();
+            dialougeStage.setTitle("Birthday Statistics");
+            dialougeStage.initModality(Modality.WINDOW_MODAL);
+            dialougeStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialougeStage.setScene(scene);                                              //sets scene in newly created window
+
+            BirthdayStatisticsController controller = loader.getController();           //connects controller
+            controller.setPersonData(personData);
+
+            dialougeStage.show();
+        }catch(IOException e)
+        {
+            e.printStackTrace();
         }
 
     }

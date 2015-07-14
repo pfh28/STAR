@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <persons>
     <person>
-        <birthday/>
+        <birthday>1999-02-21</birthday>
         <city>Example City</city>
-        <firstName>lol</firstName>
-        <lastName>Katz</lastName>
+        <firstName>Hans</firstName>
+        <lastName>Schumacker</lastName>
+        <postalCode>1234</postalCode>
+        <street>chesnut</street>
+    </person>
+    <person>
+        <birthday>1999-02-21</birthday>
+        <city>Example City</city>
+        <firstName>Drexel</firstName>
+        <lastName>Shaft</lastName>
+        <postalCode>1234</postalCode>
+        <street>a street</street>
+    </person>
+    <person>
+        <birthday>1999-02-21</birthday>
+        <city>Example City</city>
+        <firstName>Cal</firstName>
+        <lastName>Hood</lastName>
         <postalCode>1234</postalCode>
         <street>a street</street>
     </person>

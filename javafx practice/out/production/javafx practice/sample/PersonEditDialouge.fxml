@@ -34,7 +34,7 @@
             <TextField fx:id="birthdayField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <ToolBar layoutX="399.0" layoutY="346.0" prefHeight="43.0" prefWidth="187.0">
+      <ToolBar layoutX="399.0" layoutY="346.0" prefHeight="43.0" prefWidth="187.0" styleClass="background">
         <items>
           <Button defaultButton="true" mnemonicParsing="false" onAction="#handleOk" prefHeight="33.0" prefWidth="68.0" text="OK" />
             <Button mnemonicParsing="false" onAction="#handleCancel" prefHeight="25.0" text="Cancel" />

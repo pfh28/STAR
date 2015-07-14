@@ -2,10 +2,14 @@ package sample;
 
 /**
  * Created by Patrick on 7/10/2015.
+ *
+ * this class describes the paramaters and provides the methods for a person within the class
  */
 import java.time.LocalDate;
 
 import javafx.beans.property.*;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 public class Person
 {
@@ -107,6 +111,7 @@ public class Person
         return city;
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getBirthday()
     {
         return birthday.get();

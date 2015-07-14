@@ -9,7 +9,7 @@ import javafx.scene.control.Alert.AlertType;
 
 public class PersonOverviewController
 {
-    @FXML private TableView<Person> personTable;
+    @FXML private TableView<Person> personTable;                        //components attached to scene
     @FXML private TableColumn<Person, String> firstNameColumn;
     @FXML private TableColumn<Person, String> lastNameColumn;
     @FXML private Label firstNameLabel;
@@ -25,7 +25,7 @@ public class PersonOverviewController
 
     private void showPersonDetails(Person person)
     {
-        if(person != null)
+        if(person != null)                                          //diaplays data of selected person
         {
             firstNameLabel.setText(person.getFirstName());
             lastNameLabel.setText(person.getLastName());
@@ -45,7 +45,7 @@ public class PersonOverviewController
 
     }
 
-    @FXML private void initialize()
+    @FXML private void initialize()                                         //handles item selection
     {
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
@@ -63,12 +63,12 @@ public class PersonOverviewController
         personTable.setItems(mainApp.getPersonData());
     }
 
-    @FXML private void handleDeletePerson()
+    @FXML private void handleDeletePerson()                                     //handles deletion
     {
         int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0)
             personTable.getItems().remove(selectedIndex);
-        else
+        else                                                                    //error for no selection
         {
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
@@ -79,7 +79,7 @@ public class PersonOverviewController
         }
     }
 
-    @FXML private void handleNewPerson()
+    @FXML private void handleNewPerson()                                        //deals with adding people
     {
         Person tempPerson = new Person();
         boolean okClicked = mainApp.showPersonEditDialouge(tempPerson);
@@ -87,7 +87,7 @@ public class PersonOverviewController
             mainApp.getPersonData().add(tempPerson);
     }
 
-    @FXML private void handleEditPerson()
+    @FXML private void handleEditPerson()                                       //deals with editing people
     {
         Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
         if(selectedPerson != null)

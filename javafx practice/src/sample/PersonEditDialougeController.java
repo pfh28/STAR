@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class PersonEditDialougeController
 {
-    @FXML private TextField firstNameField;
+    @FXML private TextField firstNameField;                 //components connected to the page
     @FXML private TextField lastNameField;
     @FXML private TextField streetField;
     @FXML private TextField postalCodeField;
@@ -30,7 +30,7 @@ public class PersonEditDialougeController
     public void setDialougeStage(Stage dialougeStage)
     {
         this.dialougeStage = dialougeStage;
-    }
+    }   //takes stage from main
 
     public void setPerson(Person person)
     {
@@ -48,7 +48,7 @@ public class PersonEditDialougeController
     public boolean isOkClicked()
     {
         return okClicked;
-    }
+    }                   //passes information to Main
 
     @FXML private void handleOk()
     {
@@ -105,7 +105,7 @@ public class PersonEditDialougeController
 
         if(errorMessage.length() == 0)
             return true;
-        else
+        else                                                                //alert of invalid input
         {
             Alert alert = new Alert(AlertType.ERROR);
             alert.initOwner(dialougeStage);

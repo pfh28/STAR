@@ -8,7 +8,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "persons")
+@XmlRootElement(name = "persons")           //a wrapper class to allow use wit JAXB
 public class PersonListWrapper
 {
     private List<Person> persons;

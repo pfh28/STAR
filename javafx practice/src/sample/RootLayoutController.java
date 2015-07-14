@@ -20,13 +20,13 @@ public class RootLayoutController
         this.mainApp = mainApp;
     }
 
-    @FXML private void handleNew()
+    @FXML private void handleNew()                                      //creates new addressbook
     {
         mainApp.getPersonData().clear();
         mainApp.setPersonFilePath(null);
     }
 
-    @FXML private void handleOpen()
+    @FXML private void handleOpen()                                    //opens a saved addressbook
     {
         FileChooser fileChooser = new FileChooser();
 
@@ -39,7 +39,7 @@ public class RootLayoutController
             mainApp.loadPersonDataFromFile(file);
     }
 
-    @FXML private void handleSave()
+    @FXML private void handleSave()                                    //saves the current addressbook
     {
         File personFile = mainApp.getPersonFilePath();
         if(personFile != null)
@@ -48,7 +48,7 @@ public class RootLayoutController
             handleSaveAs();
     }
 
-    @FXML private void handleSaveAs()
+    @FXML private void handleSaveAs()                                   //saveas for current addressbook
     {
         FileChooser fileChooser = new FileChooser();
 
@@ -65,7 +65,7 @@ public class RootLayoutController
         }
     }
 
-    @FXML private void handleAbout()
+    @FXML private void handleAbout()                                   //gives informative splashScreen
     {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("AddressApp");
@@ -78,5 +78,10 @@ public class RootLayoutController
     @FXML private void handleExit()
     {
         System.exit(0);
+    }
+
+    @FXML private void handleShowBirthdayStatistics()
+    {
+        mainApp.showBirthdayStatistics();
     }
 }
