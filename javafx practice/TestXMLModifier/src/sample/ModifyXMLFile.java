@@ -19,9 +19,12 @@ public class ModifyXMLFile {
 
     private static String urlValue;
     private static String usernameValue;
+    private static String passwordValue;
     public static void main(String argv[])
     {
         urlValue = "yas";
+        usernameValue = "user";
+        passwordValue = "guest";
         generate();
     }
 
@@ -87,20 +90,113 @@ public class ModifyXMLFile {
             username.setAttribute("name","username");
             username.setAttribute("value",usernameValue);
 
-            // lastname elements
-            Element lastname = doc.createElement("lastname");
-            lastname.appendChild(doc.createTextNode("mook kim"));
-            dataSourceElement.appendChild(lastname);
+            //password property
+            Element password = doc.createElement("property");
+            dataSourceElement.appendChild(password);
 
-            // nickname elements
-            Element nickname = doc.createElement("nickname");
-            nickname.appendChild(doc.createTextNode("mkyong"));
-            dataSourceElement.appendChild(nickname);
+            password.setAttribute("name", "password");
+            password.setAttribute("value",passwordValue);
 
-            // salary elements
-            Element salary = doc.createElement("salary");
-            salary.appendChild(doc.createTextNode("200000"));
-            dataSourceElement.appendChild(salary);
+            // jdbcTemplate element
+            Element jdbcTemplate = doc.createElement("bean");
+            rootElement.appendChild(jdbcTemplate);
+
+            jdbcTemplate.setAttribute("id", "JDBCTemplate");
+            jdbcTemplate.setAttribute("class","fnirstool.JDBCTemplate");
+
+            //datasource property
+            Element dataSourceProperty = doc.createElement("property");
+            jdbcTemplate.appendChild(dataSourceProperty);
+
+            dataSourceProperty.setAttribute("name", "dataSource");
+            dataSourceProperty.setAttribute("ref","dataSource");
+
+            // subjectJDBCTemplate element
+            Element subjectJDBCTemplate = doc.createElement("bean");
+            rootElement.appendChild(subjectJDBCTemplate);
+
+            subjectJDBCTemplate.setAttribute("id", "SubjectJDBCTemplate");
+            subjectJDBCTemplate.setAttribute("class","GUI.model.JDBCAccess.SubjectJdbcTemplate");
+
+            //dataSource property 2
+            Element dataSourceProperty2 = doc.createElement("property");         //it seems that an element cannot be a child to two
+            subjectJDBCTemplate.appendChild(dataSourceProperty2);               //different elements.
+
+            dataSourceProperty2.setAttribute("name","dataSource");
+            dataSourceProperty2.setAttribute("ref","dataSource");
+
+            //ChannelJDBCTemplate element
+            Element channelJDBCTemplate = doc.createElement("bean");
+            rootElement.appendChild(channelJDBCTemplate);
+
+            channelJDBCTemplate.setAttribute("id", "ChannelJDBCTemplate");
+            channelJDBCTemplate.setAttribute("class","GUI.model.JDBCAccess.SubjectJdbcTemplate");
+
+            //dataSource property 3
+            Element dataSourceProperty3 = doc.createElement("property");
+            channelJDBCTemplate.appendChild(dataSourceProperty3);
+
+            dataSourceProperty3.setAttribute("name","dataSource");
+            dataSourceProperty3.setAttribute("ref", "dataSource");
+
+
+            // DetectorJDBCTemplate element
+            Element detectorJDBCTemplate = doc.createElement("bean");
+            rootElement.appendChild(detectorJDBCTemplate);
+
+            detectorJDBCTemplate.setAttribute("id", "DetectorJDBCTemplate");
+            detectorJDBCTemplate.setAttribute("class","GUI.model.JDBCAccess.DetectorJdbcTemplate");
+
+            //dataSource property 4
+            Element dataSourceProperty4 = doc.createElement("property");
+            detectorJDBCTemplate.appendChild(dataSourceProperty4);
+
+            dataSourceProperty4.setAttribute("name","dataSource");
+            dataSourceProperty4.setAttribute("ref", "dataSource");
+
+            // lightSourceJDBCTemplate element
+            Element lightSourceJDBCTemplate = doc.createElement("bean");
+            rootElement.appendChild(lightSourceJDBCTemplate);
+
+            lightSourceJDBCTemplate.setAttribute("id", "LightSourceJDBCTemplate");
+            lightSourceJDBCTemplate.setAttribute("class","GUI.model.JDBCAccess.LightSourceJdbcTemplate");
+
+            //dataSource property 5
+            Element dataSourceProperty5 = doc.createElement("property");
+            lightSourceJDBCTemplate.appendChild(dataSourceProperty5);
+
+            dataSourceProperty5.setAttribute("name","dataSource");
+            dataSourceProperty5.setAttribute("ref", "dataSource");
+
+            // rawDataJDBCTemplate element
+            Element rawDataJDBCTemplate = doc.createElement("bean");
+            rootElement.appendChild(detectorJDBCTemplate);
+
+            rawDataJDBCTemplate.setAttribute("id", "RawDataJDBCTemplate");
+            rawDataJDBCTemplate.setAttribute("class","GUI.model.JDBCAccess.RawDataJdbcTemplate");
+
+            //dataSource property 6
+            Element dataSourceProperty6 = doc.createElement("property");
+            rawDataJDBCTemplate.appendChild(dataSourceProperty6);
+
+            dataSourceProperty6.setAttribute("name","dataSource");
+            dataSourceProperty6.setAttribute("ref", "dataSource");
+
+            // stimMarkerJDBCTemplate element
+            Element stimMarkerJDBCTemplate = doc.createElement("bean");
+            rootElement.appendChild(stimMarkerJDBCTemplate);
+
+            stimMarkerJDBCTemplate.setAttribute("id", "StimMarkerJDBCTemplate");
+            stimMarkerJDBCTemplate.setAttribute("class","GUI.model.JDBCAccess.StimMarkerJdbcTemplate");
+
+            //dataSource property 7
+            Element dataSourceProperty7 = doc.createElement("property");
+            stimMarkerJDBCTemplate.appendChild(dataSourceProperty7);
+
+            dataSourceProperty7.setAttribute("name","dataSource");
+            dataSourceProperty7.setAttribute("ref", "dataSource");
+
+
 
             // write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
