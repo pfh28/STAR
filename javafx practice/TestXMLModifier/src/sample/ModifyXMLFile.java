@@ -22,10 +22,25 @@ public class ModifyXMLFile {
     private static String passwordValue;
     public static void main(String argv[])
     {
-        urlValue = "yas";
+        urlValue = "database.url";
         usernameValue = "user";
         passwordValue = "guest";
         generate();
+    }
+
+    public static void setUrlValue(String url)
+    {
+        urlValue = url;
+    }
+
+    public static void setUsernameValue(String username)
+    {
+        usernameValue = username;
+    }
+
+    public static void setPasswordValue(String password)
+    {
+        passwordValue = password;
     }
 
     private static void generate()
@@ -73,7 +88,7 @@ public class ModifyXMLFile {
             Element driverClassName = doc.createElement("property");
             dataSourceElement.appendChild(driverClassName);
 
-            driverClassName.setAttribute("name", "driver");
+            driverClassName.setAttribute("name", "driverClassName");
             driverClassName.setAttribute("value","org.postgresql.Driver");
 
             //url property
@@ -130,7 +145,7 @@ public class ModifyXMLFile {
             rootElement.appendChild(channelJDBCTemplate);
 
             channelJDBCTemplate.setAttribute("id", "ChannelJDBCTemplate");
-            channelJDBCTemplate.setAttribute("class","GUI.model.JDBCAccess.SubjectJdbcTemplate");
+            channelJDBCTemplate.setAttribute("class","GUI.model.JDBCAccess.ChannelJdbcTemplate");
 
             //dataSource property 3
             Element dataSourceProperty3 = doc.createElement("property");
@@ -170,7 +185,7 @@ public class ModifyXMLFile {
 
             // rawDataJDBCTemplate element
             Element rawDataJDBCTemplate = doc.createElement("bean");
-            rootElement.appendChild(detectorJDBCTemplate);
+            rootElement.appendChild(rawDataJDBCTemplate);
 
             rawDataJDBCTemplate.setAttribute("id", "RawDataJDBCTemplate");
             rawDataJDBCTemplate.setAttribute("class","GUI.model.JDBCAccess.RawDataJdbcTemplate");
